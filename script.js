@@ -42,7 +42,7 @@ class Confetti {
         this.angle++;
 
 
-        if (this.y > canvas.height) {
+        if (this.y - this.height > canvas.height) {
             this.x = Math.random() * canvas.width;
             this.y = Math.random() * -canvas.height;
             this.color = possibleColors[Math.floor(Math.random() * possibleColors.length)];
@@ -63,21 +63,19 @@ class Confetti {
     }
 }
 
-for (let i = 0; i < 100; i++) {
-    particlesArray.push(new Confetti());
+function init() {
+    for (let i = 0; i < 100; i++) {
+        particlesArray.push(new Confetti());
+    }
 }
+init();
 
 function animate() {
-
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
     for (let i = 0; i < particlesArray.length; i++) {
         particlesArray[i].update();
         particlesArray[i].draw();
-
-
     }
-
     requestAnimationFrame(animate);
 }
 animate();
